@@ -179,15 +179,15 @@ Return
 - `choco install vscode`
 - It's basically an IDE at this point.
 - Here are a list of essential/great extensions (excludes language specific):
-  - ms-vscode-remote.remote-ssh
-  - ms-vscode-remote.remote-ssh-edit
-  - ms-vscode-remote.remote-wsl
-  - ms-vscode.remote-explorer
-  - ms-azuretools.vscode-docker
-  - esbenp.prettier-vscode
-  - eamodio.gitlens
-  - Tyriar.sort-lines
-  - tomoki1207.pdf
+  - [ms-vscode-remote.remote-ssh](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+  - [ms-vscode-remote.remote-ssh-edit](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit)
+  - [ms-vscode-remote.remote-wsl](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+  - [ms-vscode.remote-explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer)
+  - [ms-azuretools.vscode-docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+  - [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  - [eamodio.gitlens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+  - [Tyriar.sort-lines](https://marketplace.visualstudio.com/items?itemName=Tyriar.sort-lines)
+  - [tomoki1207.pdf](https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf)
 - Personally recommend the theme One Dark Pro (zhuangtongfa.material-theme)
 
 ## Setup OpenSSH
@@ -227,7 +227,7 @@ Return
 - If VSCode doesn't detect `pyenv` interpreters you can add the following to your `settings.json`
   - "python.venvPath": "~/.pyenv/pyenv-win/versions"
 
-## NodeJS
+### NodeJS
 
 - I manage NodeJS versions (as god they change so often) using `nvm`
 - `choco install nvm`
