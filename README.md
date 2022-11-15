@@ -226,6 +226,8 @@ Return
   - Set as global version with `pyenv global <version>`
 - If VSCode doesn't detect `pyenv` interpreters you can add the following to your `settings.json`
   - "python.venvPath": "~/.pyenv/pyenv-win/versions"
+- **Caution:** for some god-forsaken reason by default, Windows adds Windows store `python` to your path even if it's not installed
+  - Remove this from `%LOCALAPPDATA%\Microsoft\WindowsApps\`
 
 ### NodeJS
 
