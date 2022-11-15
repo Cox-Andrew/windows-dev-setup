@@ -202,6 +202,7 @@ Return
 - `choco install git`
 - Setup git to use OpenSSH
   - `git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"`
+- Somebody (hey not saying it's you) commit and push credentials? Scrub them from the repo using [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/)
 
 ## WSL2
 
