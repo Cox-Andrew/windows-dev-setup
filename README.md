@@ -196,6 +196,10 @@ Return
 - [Generate private/public keys](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement)
 - Configure `~\.ssh\ssh_config`
 - Comment out / remove the `adminstrator_authorized_keys` from `%PROGRAMDATA%\ssh\sshd_config`
+- Set Powershell/bash as default ssh shell
+  - `New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value <shell path> -PropertyType String -Force`
+  - `C:\Program Files\PowerShell\7\pwsh.exe`
+  - `C:\WINDOWS\system32\bash.exe`
 
 ## Git
 
