@@ -207,7 +207,16 @@ Return
 
 - [Install](https://learn.microsoft.com/en-us/windows/wsl/install)
 
-## Python
+## PowerToys
+
+- `choco install powertoys`
+- I honestly find this an essential extension to Windows (curtesy of and personally used by the Windows team)
+  - **PowerToys Run:** MacOS like run pop-up `Alt+Space`
+  - **FancyZones:** custom window snapping - especially useful to improve the awful Windows vertical monitor snapping
+
+## Language Specifics
+
+### Python
 
 - Personally I find it easiest to manage Python versions using `pyenv`
 - `choco install pyenv-win`
