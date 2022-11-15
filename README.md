@@ -170,7 +170,8 @@ Return
 
 ## VSCode
 
-- Install it - basically an IDE at this point.
+- `choco install vscode`
+- It's basically an IDE at this point.
 - Here are a list of essential/great extensions (excludes language specific):
   - ms-vscode-remote.remote-ssh
   - ms-vscode-remote.remote-ssh-edit
