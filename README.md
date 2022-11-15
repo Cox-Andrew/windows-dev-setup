@@ -2,6 +2,12 @@
 
 This is my ([@cox-andrew](https://github.com/cox-andrew)) assortment of tips (**not a complete guide**) for consideration when setting up Windows for a range of development activities. Enjoy the nerd shit :)
 
+---
+
+You will probably need to relog after installing these tools to get them to show on PATH correctly.
+
+---
+
 ## Chocolatey
 
 - Package manager for Windows - alternatively look into [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
