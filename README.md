@@ -200,3 +200,20 @@ Return
 ## WSL2
 
 - [Install](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+## Python
+
+- Personally I find it easiest to manage Python versions using `pyenv`
+- `choco install pyenv-win`
+- `pyenv update`
+- View available versions with `pyenv install -l`
+  - Then `pyenv install <version>`
+  - Set as global version with `pyenv global <version>`
+- If VSCode doesn't detect `pyenv` interpreters you can add the following to your `settings.json`
+  - "python.venvPath": "~/.pyenv/pyenv-win/versions"
+
+## NodeJS
+
+- I manage NodeJS versions (as god they change so often) using `nvm`
+- `choco install nvm`
+- `nvm install <latest/lts/version>`
