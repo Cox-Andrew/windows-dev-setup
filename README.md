@@ -4,7 +4,7 @@ This is my ([@cox-andrew](https://github.com/cox-andrew)) assortment of tips (**
 
 ---
 
-You will probably need to relog after installing these tools to get them to show on PATH correctly.
+You will probably need to relog or `refreshenv` after installing these tools to get them to show on `PATH` correctly.
 
 ---
 
@@ -15,10 +15,12 @@ You will probably need to relog after installing these tools to get them to show
 
 ## PowerShell Core
 
+- Improved cross-platform PowerShell
 - `choco install powershell-core`
 
 ## Windows Terminal
 
+- Best Windows terminal emulator imo
 - `choco install microsoft-windows-terminal`
 - Customise start-up script `$PROFILE`
 
@@ -196,6 +198,31 @@ Return
 - [Generate private/public keys](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement)
 - Configure `~\.ssh\ssh_config`
 - Comment out / remove the `adminstrator_authorized_keys` from `%PROGRAMDATA%\ssh\sshd_config`
+
+## Setup GPG
+
+- `choco install gpg4win`
+- Generate GPG key
+  - `gpg --full-generate-key --expert`
+  - select EDDSA and Curve 25519 (default)
+  - make sure to add a passphrase
+- View key
+  - `gpg --list-secret-keys --keyid-format short`
+- Generate signing sub-key
+  - `gpg --edit-key <key id> --expert`
+  - `addkey`
+  - Select ECC (sign only) and Curve 25519 (default)
+  - `save`
+- Upload public key to GitHub
+  - `gpg --armor --export <key id> | clip`
+  - paste into GitHub GPG key settings
+- Configure git to use GPG
+  - `git config --global commit.gpgsign true`
+  - `git config --global gpg.program <gpg.exe path>`
+- For ease of use increase the GPG key cache timeout
+  - `gpgconf --list-options gpg-agent`
+  - `gpgconf --change-options gpg-agent max-cache-ttl=<lifetime in seconds>`
+  - `gpgconf --reload gpg-agent`
 
 ## Git
 
