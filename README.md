@@ -24,6 +24,7 @@ You will probably need to relog or `refreshenv` after installing these tools to 
 - `choco install microsoft-windows-terminal`
 - Customise start-up script `$PROFILE`
 
+<!-- TODO: add reference to file and update file -->
 ```powershell
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -72,6 +73,7 @@ Set-Alias -Name cwd -Value Copy-Path -Description "Copy working directory to cli
 - Used for useful key binds such as launching Windows Terminal
 - Place scripts in `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` to run on login
 
+<!-- TODO: add reference to file and update file -->
 ```autohotkey
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
@@ -203,7 +205,7 @@ Return
   - `C:\Program Files\PowerShell\7\pwsh.exe`
   - `C:\WINDOWS\system32\bash.exe`
 
-## Setup GPG
+## ~~Setup GPG~~ Wouldn't recommend anymore
 
 - `choco install gpg4win`
 - Generate GPG key
@@ -234,6 +236,8 @@ Return
 - Setup git to use OpenSSH
   - `git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"`
 - Somebody (hey not saying it's you) commit and push credentials? Scrub them from the repo using [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/)
+- Ensure git uses wincred keyring for credentials
+  - `git config --global credential.helper wincred`
 
 ## WSL2
 
