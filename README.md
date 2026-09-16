@@ -25,6 +25,7 @@ You will probably need to relog or `refreshenv` after installing these tools to 
 - Customise start-up script `$PROFILE`
 
 <!-- TODO: add reference to file and update file -->
+
 ```powershell
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -38,7 +39,7 @@ $ESC = [char]27
 function prompt {
   $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
   $admin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-  "$ESC$($admin ? '[91m' : '[92m')$env:USERNAME$ESC[96m@$env:COMPUTERNAME $ESC[92m$(if ($pwd.ToString() -eq $HOME) {"~"} else {Split-Path -Path $pwd -Leaf})$ESC[0m$('>' * ($nestedPromptLevel + 1)) "  
+  "$ESC$($admin ? '[91m' : '[92m')$env:USERNAME$ESC[96m@$env:COMPUTERNAME $ESC[92m$(if ($pwd.ToString() -eq $HOME) {"~"} else {Split-Path -Path $pwd -Leaf})$ESC[0m$('>' * ($nestedPromptLevel + 1)) "
 }
 
 # Register ssh autocomplete
@@ -74,6 +75,7 @@ Set-Alias -Name cwd -Value Copy-Path -Description "Copy working directory to cli
 - Place scripts in `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` to run on login
 
 <!-- TODO: add reference to file and update file -->
+
 ```autohotkey
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
@@ -86,7 +88,7 @@ pinned := false
 ; Suspend/resume process utils
 ProcessSuspend(pid) {
     handle := DllCall("OpenProcess", "uInt", 0x1F0FFF, "Int", 0, "Int", pid)
-    If !handle   
+    If !handle
         Return -1
     DllCall("ntdll.dll\NtSuspendProcess", "Int", handle)
     DllCall("CloseHandle", "Int", handle)
@@ -94,7 +96,7 @@ ProcessSuspend(pid) {
 
 ProcessResume(pid) {
     handle := DllCall("OpenProcess", "uInt", 0x1F0FFF, "Int", 0, "Int", pid)
-    If !handle   
+    If !handle
         Return -1
     DllCall("ntdll.dll\NtResumeProcess", "Int", handle)
     DllCall("CloseHandle", "Int", handle)
@@ -139,7 +141,7 @@ ProcessSuspended(pid) {
 
 ; Dark/Light Mode Toggle
 ^!+l::
-    ; Get the current light mode status 
+    ; Get the current light mode status
     RegRead, isLightmode, HKCU, SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize, SystemUsesLightTheme
     If isLightmode {
         ; Switch to dark theme
@@ -277,17 +279,10 @@ Return
 
 Automates video compression using single-pass CRF encoding (H.265/HEVC via FFmpeg) with real-time PowerShell progress reporting.
 
-- **Prerequisites:** FFmpeg (`winget install Gyan.FFmpeg`)
-- **Usage:**
-  ```powershell
-  # Compress with default high quality
-  .\scripts\compress.ps1 -Path "input.mp4"
+```powershell
+# Compress with default high quality
+.\scripts\compress.ps1 -Path "input.mp4"
 
-  # Specify quality presets: low, medium, or high
-  .\scripts\compress.ps1 -Path "input.mp4" -Quality medium
-  .\scripts\compress.ps1 -Path "input.mp4" -Low
-
-  # Strip audio and open in Edge after completion
-  .\scripts\compress.ps1 -Path "input.mp4" -Mute -Open
-  ```
-
+# Specify quality presets: low, medium, or high
+.\scripts\compress.ps1 -Help
+```

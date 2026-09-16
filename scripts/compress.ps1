@@ -24,8 +24,14 @@
 .PARAMETER Mute
     If present, the audio stream will be stripped.
 
+.PARAMETER Open
+    If present, opens the compressed video in Microsoft Edge after encoding.
+
 .PARAMETER Verbose
     If present, displays FFmpeg stream info, encoding progress, and detailed logs.
+
+.PARAMETER Help
+    Displays this help documentation.
 
 .EXAMPLE
     .\compress.ps1 -Path "input.mp4"
@@ -37,28 +43,44 @@
     .\compress.ps1 -Path "input.mp4" -Low -Mute
 
 .EXAMPLE
-    .\compress.ps1 -Path "input.mp4" -Verbose
+    .\compress.ps1 -Path "input.mp4" -Open
+
+.EXAMPLE
+    .\compress.ps1 -help
 #>
 
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName = "Compress")]
 param (
-    [Parameter(Mandatory = $true, Position = 0)]
+    [Parameter(Mandatory = $true, Position = 0, ParameterSetName = "Compress")]
     [string]$Path,
 
-    [Parameter(Position = 1)]
+    [Parameter(Position = 1, ParameterSetName = "Compress")]
     [ValidateSet("low", "medium", "high", IgnoreCase = $true)]
     [string]$Quality = "high",
 
+    [Parameter(ParameterSetName = "Compress")]
     [switch]$Low,
+
+    [Parameter(ParameterSetName = "Compress")]
     [switch]$Medium,
+
+    [Parameter(ParameterSetName = "Compress")]
     [switch]$High,
 
-    [switch]$Mute
+    [Parameter(ParameterSetName = "Compress")]
+    [switch]$Mute,
+
+    [Parameter(ParameterSetName = "Compress")]
+    [switch]$Open,
+
+    [Parameter(ParameterSetName = "Help")]
+    [Alias("h", "?")]
+    [switch]$Help
 )
 
 # --- 1. Help & Validation ---
-if ($Path -eq "--help" -or $Path -eq "-h") {
-    Get-Help $PSCommandPath
+if ($Help -or $Path -eq "--help" -or $Path -eq "-h" -or $Path -eq "-help") {
+    Get-Help $PSCommandPath -Detailed
     exit 0
 }
 
@@ -95,8 +117,8 @@ if (-not (Test-Path $Path)) {
 
 # --- 2. Resolve Quality & Settings ---
 if ($Low) { $Quality = "low" }
-elseif ($High) { $Quality = "high" }
 elseif ($Medium) { $Quality = "medium" }
+elseif ($High) { $Quality = "high" }
 
 switch ($Quality.ToLower()) {
     "low" {
@@ -166,9 +188,11 @@ $currentFps = ""
     $line = $_
     if ($line -match '^speed=\s*(\S+)') {
         $currentSpeed = $Matches[1]
-    } elseif ($line -match '^fps=\s*(\S+)') {
+    }
+    elseif ($line -match '^fps=\s*(\S+)') {
         $currentFps = $Matches[1]
-    } elseif ($line -match '^out_time_us=(\d+)') {
+    }
+    elseif ($line -match '^out_time_us=(\d+)') {
         if ($totalDuration -gt 0) {
             $currentTimeSec = [double]$Matches[1] / 1000000.0
             $percent = [math]::Min(99, [math]::Max(0, [math]::Round(($currentTimeSec / $totalDuration) * 100)))
@@ -180,13 +204,15 @@ $currentFps = ""
                 -Status $statusMsg `
                 -PercentComplete $percent
         }
-    } elseif ($line -match '^out_time=(\S+)' -and $totalDuration -le 0) {
+    }
+    elseif ($line -match '^out_time=(\S+)' -and $totalDuration -le 0) {
         $statusMsg = "Time: $($Matches[1])"
         if ($currentSpeed -and $currentSpeed -ne 'N/A') { $statusMsg += " | Speed: $currentSpeed" }
         if ($currentFps -and $currentFps -ne '0.00' -and $currentFps -ne 'N/A') { $statusMsg += " | FPS: $currentFps" }
 
         Write-Progress -Activity "Compressing $fileName" -Status $statusMsg
-    } elseif ($line -match '^progress=end') {
+    }
+    elseif ($line -match '^progress=end') {
         Write-Progress -Activity "Compressing $fileName" -Status "100% complete" -PercentComplete 100
     }
 }
@@ -211,6 +237,10 @@ if ($exitCode -eq 0) {
     Write-Host "If playback fails, you can open the file in Microsoft Edge or VLC:" -ForegroundColor Yellow
     Write-Host "  Link   : $fileUri" -ForegroundColor Cyan
     Write-Host "  Command: Start-Process msedge `"$resolvedPath`"" -ForegroundColor Cyan
+
+    if ($Open) {
+        Start-Process msedge $resolvedPath
+    }
 } else {
     Write-Host "Error: FFmpeg compression failed." -ForegroundColor Red
     exit 1
