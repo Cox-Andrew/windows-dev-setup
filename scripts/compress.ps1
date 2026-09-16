@@ -24,9 +24,6 @@
 .PARAMETER Mute
     If present, the audio stream will be stripped.
 
-.PARAMETER Open
-    If present, opens the compressed video in Microsoft Edge after encoding.
-
 .PARAMETER Verbose
     If present, displays FFmpeg stream info, encoding progress, and detailed logs.
 
@@ -41,9 +38,6 @@
 
 .EXAMPLE
     .\compress.ps1 -Path "input.mp4" -Low -Mute
-
-.EXAMPLE
-    .\compress.ps1 -Path "input.mp4" -Open
 
 .EXAMPLE
     .\compress.ps1 -help
@@ -69,9 +63,6 @@ param (
 
     [Parameter(ParameterSetName = "Compress")]
     [switch]$Mute,
-
-    [Parameter(ParameterSetName = "Compress")]
-    [switch]$Open,
 
     [Parameter(ParameterSetName = "Help")]
     [Alias("h", "?")]
@@ -237,10 +228,6 @@ if ($exitCode -eq 0) {
     Write-Host "If playback fails, you can open the file in Microsoft Edge or VLC:" -ForegroundColor Yellow
     Write-Host "  Link   : $fileUri" -ForegroundColor Cyan
     Write-Host "  Command: Start-Process msedge `"$resolvedPath`"" -ForegroundColor Cyan
-
-    if ($Open) {
-        Start-Process msedge $resolvedPath
-    }
 } else {
     Write-Host "Error: FFmpeg compression failed." -ForegroundColor Red
     exit 1

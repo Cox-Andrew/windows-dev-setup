@@ -283,6 +283,6 @@ Automates video compression using single-pass CRF encoding (H.265/HEVC via FFmpe
 # Compress with default high quality
 .\scripts\compress.ps1 -Path "input.mp4"
 
-# Specify quality presets: low, medium, or high
+# See other parameters
 .\scripts\compress.ps1 -Help
 ```
