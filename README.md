@@ -270,3 +270,24 @@ Return
 - I manage NodeJS versions (as god they change so often) using `nvm`
 - `choco install nvm`
 - `nvm install <latest/lts/version>`
+
+## Utilities & Scripts
+
+### Video Compression (`scripts/compress.ps1`)
+
+Automates video compression using single-pass CRF encoding (H.265/HEVC via FFmpeg) with real-time PowerShell progress reporting.
+
+- **Prerequisites:** FFmpeg (`winget install Gyan.FFmpeg`)
+- **Usage:**
+  ```powershell
+  # Compress with default high quality
+  .\scripts\compress.ps1 -Path "input.mp4"
+
+  # Specify quality presets: low, medium, or high
+  .\scripts\compress.ps1 -Path "input.mp4" -Quality medium
+  .\scripts\compress.ps1 -Path "input.mp4" -Low
+
+  # Strip audio and open in Edge after completion
+  .\scripts\compress.ps1 -Path "input.mp4" -Mute -Open
+  ```
+
